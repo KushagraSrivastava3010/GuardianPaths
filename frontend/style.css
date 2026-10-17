@@ -1,0 +1,265 @@
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eef7f6, #f8fbfb);
+  display: flex;
+  justify-content: center;
+  color: #1f2933;
+}
+
+/* ---------- MAIN LAYOUT ---------- */
+.app-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 24px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "header header"
+    "form result"
+    "map map";
+  gap: 18px;
+}
+
+/* ---------- HEADER ---------- */
+.header {
+  grid-area: header;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.header h1 {
+  font-size: 3.2rem;
+  margin-bottom: 6px;
+}
+
+.header p {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+/* ---------- CARDS ---------- */
+.card {
+  grid-area: form;
+}
+
+.result-card {
+  grid-area: result;
+}
+
+.map-card {
+  grid-area: map;
+}
+
+.card,
+.result-card,
+.map-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 18px 35px rgba(0,0,0,0.08);
+  margin-bottom: 0;
+}
+
+/* ---------- FORM ---------- */
+.form-group {
+  margin-bottom: 14px;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  background: #0f766e;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background: #115e59;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ---------- RESULT ---------- */
+.status-header {
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.status-header.safe {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.status-header.moderately {
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.status-header.high {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.info-grid {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.info-box {
+  flex: 1;
+  background: #f9fafb;
+  padding: 8px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.confidence-bar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 10px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  border-radius: 10px;
+  width: 0;
+  animation: fillBar 1.2s ease-out forwards;
+}
+
+@keyframes fillBar {
+  from { width: 0; }
+  to { width: var(--confidence-width); }
+}
+
+.reason-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 6px;
+}
+
+.reason-list li {
+  margin-bottom: 4px;
+}
+
+/* ---------- MAP ---------- */
+#map {
+  height: 420px;
+  width: 100%;
+  border-radius: 14px;
+  margin-top: 6px;
+}
+
+#map.expanded {
+  height: 620px;
+}
+
+/* ---------- EXPAND MAP BUTTON ---------- */
+.expand-map-btn {
+  margin-bottom: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "form"
+      "result"
+      "map";
+  }
+}
+
+/* ---------- SUBTLE CARD HOVER ELEVATION ---------- */
+.card,
+.result-card,
+.map-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover,
+.result-card:hover,
+.map-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- TAB SWITCHER ---------- */
+.tab-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tab-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #374151;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.tab-btn:hover {
+  background: #d1d5db;
+}
+
+.tab-btn.active {
+  background: #0f766e;
+  color: #fff;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* ---------- CROWD RESULT IMPROVEMENT ---------- */
+.info-grid {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.info-box {
+  flex: 1;
+  background: #f9fafb;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.95rem;
+}

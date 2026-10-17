@@ -1,0 +1,28 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# IDE and operating system
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Downloaded model weights
+yolov8n.pt
+yolov8s.pt
+yolov8m.pt
+
+# Temporary files
+.pytest_cache/

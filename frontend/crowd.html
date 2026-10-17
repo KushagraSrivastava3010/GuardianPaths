@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crowd Density Analyzer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="app-container">
+
+    <div class="header">
+      <h1>👥 Crowd Density Analyzer</h1>
+      <p>Detect crowd risk and predict stampede conditions using AI</p>
+
+      <!-- TAB SWITCHER -->
+      <div class="tab-switcher">
+        <button class="tab-btn" onclick="window.location.href='index.html'">
+          Safety
+        </button>
+        <button class="tab-btn active">
+          Crowd Analysis
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="form-group">
+        <label>Upload Crowd Image</label>
+        <input type="file" id="crowdImage" />
+      </div>
+
+      <button class="primary-btn" onclick="analyzeCrowd()">Analyze Crowd</button>
+    </div>
+
+    <div id="crowdResult" class="result-card hidden"></div>
+
+  </div>
+
+  <script>
+    function getCrowdExplanation(level) {
+      if (level === "safe") {
+        return "Area is safe with normal crowd levels.";
+      } else if (level === "moderately") {
+        return "Crowd is increasing, caution advised.";
+      } else {
+        return "High crowd density detected. Risk of stampede.";
+      }
+    }
+
+    async function analyzeCrowd() {
+      const fileInput = document.getElementById("crowdImage");
+      const resultDiv = document.getElementById("crowdResult");
+
+      if (!fileInput.files.length) {
+        alert("Please upload an image");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("image", fileInput.files[0]);
+
+      resultDiv.classList.remove("hidden");
+      resultDiv.innerHTML = "Analyzing crowd...";
+
+      try {
+        const res = await fetch("http://127.0.0.1:5000/predict_crowd", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await res.json();
+
+        resultDiv.innerHTML = `
+          <div class="status-header ${data.level}">
+            <h3>${data.message}</h3>
+            <p>${getCrowdExplanation(data.level)}</p>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-box">
+              <strong>People Count</strong><br>
+              ${data.count ?? 0}
+            </div>
+
+            <div class="info-box">
+              <strong>Density</strong><br>
+              ${data.density} /m²
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        resultDiv.innerHTML = "Server not responding.";
+      }
+    }
+  </script>
+
+</body>
+</html>

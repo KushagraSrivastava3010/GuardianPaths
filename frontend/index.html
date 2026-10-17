@@ -1,0 +1,75 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Safe Route Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="app-container">
+
+    <div class="header">
+      <h1>GuardianPaths</h1>
+      <p>AI-Enhanced Urban Safety & Intelligent Navigation.</p>
+
+      <!-- ✅ NEW TAB SWITCHER -->
+      <div class="tab-switcher">
+        <button class="tab-btn active" onclick="window.location.href='index.html'">
+          Safety
+        </button>
+        <button class="tab-btn" onclick="window.location.href='crowd.html'">
+          Crowd Analysis
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="form-group">
+        <label>Start Location</label>
+        <select id="start">
+          <option value="">Select start location</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>End Location</label>
+        <select id="end">
+          <option value="">Select end location</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Time of Travel</label>
+        <select id="time">
+          <option value="Daytime">Daytime</option>
+          <option value="Night">Night</option>
+        </select>
+      </div>
+
+      <button class="primary-btn" onclick="findRoute()">Find Safest Route</button>
+    </div>
+
+    <div id="result" class="result-card hidden"></div>
+
+    <div class="map-card">
+      <h3>🗺️ Route Map</h3>
+      <button class="expand-map-btn" onclick="toggleMapSize()">⛶ Expand Map</button>
+      <div id="map"></div>
+    </div>
+
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
