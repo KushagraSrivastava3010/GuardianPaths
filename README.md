@@ -3,6 +3,18 @@
 
 GuardianPaths is an AI-powered urban safety platform designed to support safer route selection and crowd-density analysis. It combines route-safety assessment, interactive maps, and computer vision to help users understand potential safety concerns in urban environments.
 
+## 📸 Screenshots
+
+### Main Dashboard
+![GuardianPaths Main Dashboard](screenshots/dashboard.png)
+
+### Route Safety Analysis
+![GuardianPaths Route Safety Analysis](screenshots/route-safety.png)
+
+### Crowd Density Analysis
+![GuardianPaths Crowd Density Analysis](screenshots/crowd-analysis.png)
+
+
 ## ✨ Features
 
 - **Safety-Aware Navigation:** Evaluates routes using road-network and safety-related data.
